@@ -1,0 +1,51 @@
+<div class="movie">
+  <br>
+  <div class="movie-title">{{ movie.Title }}</div>
+  <br>
+  <img class="movie-poster-image" *ngIf="isMoviePosterExist" [src]="movie.Poster" />
+  <img class="no-movie-poster-img" *ngIf="!isMoviePosterExist" [src]="noMoviePosterImg" />
+  
+  <a class="link" href="http://www.imdb.com/title/{{ movie.imdbID }}" target="_blank">
+    To Movie IMDb Page
+  </a>
+  <br>
+
+  <button 
+    class="show-movie-details-btn"
+    *ngIf="toShowMovieDetails" 
+    (click)="showDetails(movie.imdbID)">
+    Show Movie Details
+  </button>
+
+  <button 
+    class="hide-movie-details-btn"
+    *ngIf="!toShowMovieDetails" 
+    (click)="hideDetails(movie.imdbID)">
+    Hide Movie Details
+  </button>
+  <br><br>
+
+  <div
+    class="movie-details" 
+    *ngIf="movieDetails.length > 0">
+    <div
+      class="movie-detail"
+      *ngFor="let movieDetail of movieDetails">
+      <br>
+      <b><u style="color: #CC3C59;font-size: 18px">{{ movieDetail.key }}</u></b>
+      <br>
+      {{ movieDetail.value }}
+      <br><br>
+    </div>
+  </div>
+
+  <br>
+  <button 
+    class="hide-movie-details-btn"
+    *ngIf="!toShowMovieDetails" 
+    (click)="hideDetails(movie.imdbID)">
+    Hide Movie Details
+  </button>
+  <br><br>
+
+</div>

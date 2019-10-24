@@ -1,0 +1,27 @@
+<form id="search-form" (submit)="searchMovie($event, movieSearchField)">
+  <!-- <input type="text" placeholder="Enter movie name..." minlength="2" #movieSearchField/> -->
+  <input type="text" placeholder="Enter movie name" #movieSearchField/>
+  <button type="submit">Search</button>
+</form>
+
+<div *ngIf="!isMovieNameLongEnough" class="search-error">
+  Movie name must contain at least {{MOVIE_NAME_MIN_LENGTH}} characters
+</div>
+<div *ngIf="isErrInSearchResult" class="search-error">
+  {{errMessage}}
+</div>
+
+
+<div id="movies">
+  <div *ngFor="let movie of movies">
+    <app-movie [movie]="movie" ></app-movie> <br><br><br>
+  </div>
+
+  <button 
+    *ngIf="movies.length > 0 && hasMoreMovies"
+    id="load-more-btn" 
+    (click)="loadMovies()" 
+    [disabled]="!hasMoreMovies">
+    Load More Movies
+  </button>
+</div>
